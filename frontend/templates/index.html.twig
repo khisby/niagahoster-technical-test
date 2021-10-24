@@ -1,14 +1,330 @@
-<html>
-    <head>
-        <title>Khisoft Niagahoster</title>
-    </head>
-    <body>
-              {% for i in data.data %}
-                    {{ i.title }}<br>
-                    {% for j in i.feature %}
-                              {{ j  | raw }}
-                              <br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Niagahoster Landing Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha512-UyNhw5RNpQaCai2EdC+Js0QL4RlVmiq41DkmCJsRV3ZxipG2L0HhTqIf/H9Hp8ez2EnFlkBnjRGJU2stW3Lj+w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @font-face {
+            font-family: Montserrat;
+            src: url('/assets/fonts/montserrat/Montserrat-Light.otf');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: MontserratBlack;
+            src: url('/assets/fonts/montserrat/Montserrat-Black.otf');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: Roboto;
+            src: url('/assets/fonts/roboto/Roboto-Regular.ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: RobotoBold;
+            src: url('/assets/fonts/roboto/Roboto-Bold.ttf');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        body, html{
+            font-family: Montserrat, Arial, Helvetica, sans-serif !important;
+        }
+
+        .font-montserrat{
+            font-family: Montserrat, Arial, Helvetica, sans-serif !important;
+        }
+
+        .font-montserrat-bold{
+            font-family: MontserratBlack, Arial, Helvetica, sans-serif !important;
+        }
+
+        .font-roboto{
+            font-family: Roboto, Arial, Helvetica, sans-serif !important;
+        }
+        
+        .font-roboto-bold{
+            font-family: RobotoBold, Arial, Helvetica, sans-serif !important;
+        }
+
+        hr{
+            opacity: 0.6;
+        }
+    </style>
+<body>
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="0 0 100 100">
+                            <image id="Rectangle_1_copy" data-name="Rectangle 1 copy" x="4" y="-1" width="92" height="100" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAABkCAYAAAALxleYAAAEgElEQVR4nO2da6ilUxjHfwuh+LBKIh9QLh8UIZEiKTR8MHwgl3IXISuESC4xyLjMUigZlEvCmKgxQ6QZlw+icUnRTOOWMa6z3MWcWVoz69R0zJyz9z7v+9/vnnl+H3d7r7Xe33ne533Ws946jjmrM4aMrUy1FhMuxoSLMeFiTLgYEy7GhIsx4WJMuBgTLsaEizHhYky4GBMuxoSLMeFiTLgYEy7GhIsx4WJMuBgTLsaEizHhYky4GBMuxoSLMeFiTLgYEy7GhIsx4WJMuBgTLsaEizHhYky4GBMuxoSLMeFiTLgYEy7GhIsx4WJMuBgTLsaEizHhYky4GBMuxoSLMeFiTLgYEy7GhIsx4WJMuBgTLsaEizHhYky4GBMuxoSLMeFiRlX4z8DzwPIOrKUvRk34GPAxcD9wEXA78DbwVwfW1hPbjMAaxylS3wPuyMEvrJ895mJaCtwIHAfsMPxlTs4oRfiTwLnAaxM+LxF/WflDAP8MaW09Mwr/dONH4NaSs3PwKzf1JRfTTsARwE3AQdol9k7Xhb9c0gawMAf/Ry8/cDEdCZwNnAls3/4S+6OrOfx7YB7weA7+3X5+mIN/08X0NfANcBqwb3vL7J8uRvgK4FHg3hz8tKoPF9NZwDXAPsC2zS1xcLokvDzwlgHX5+BfampQF9MBwGzgcGDHddc8RLpUpZQUcjqwqOFxPwFKpN8H/Nrw2H3ThQgvuXZWEZ2D/7ytSVxMOwNHAdcBB7c1z1QMO8JfBy4plUibsln/MP2h3kVXAk+3OddkDKtKKbX1q8ADOfh3VJPm4MvdvNjF9BWwCpgJ7KWanyGklDLXl8BTwD05+NXCuf+Hi+n82pPZX1WzK1PKGuCjmkJuHrZs1kf83A3aBZK2gFJ4aaeeXPJ2Dn6NcN6p+BQ4B7gb+LftyRQp5bvaTn0mB7+i5bkGxsW0C3ACcEVNMe3M07LwUoU8AbyYg08tztMILqatgRnAGXVP0PgmqS3h5USm9KwfVFYhTeFi2gO4FDgF2LPRsRsWPlarkGdLmzQH3/n+9GS4mC6uD/nSANuukTEbFD5Wq5BZOfh5DY05dFxMhwK3AMc0sW9pskopu7dS1y5ocMwusLSeKJXz07XTXU8TEV4ehncBz+XgR+4UvVdcTLsCRwM3APsNPM40hS8B5tbjrz+nMc7I4GI6HjgPOHGQHvugOekn4BXgkRz8G5uHyt4obwy4mMp+YmWV3lcV028OL3fDt8DDwOVbmuxxcvCfAVcBdwJf9LND7SeljNXBr87Bz5/WijcjXEyHlEYccFgvpWM/EV4kn9rCicyo80HdmUZgyjcLeonwVXWw+fVWMjYmMqbd6ttfAThwUOFv1XxdZP9uoqfGxTSj9thP2tiXN1Wl/FJlz87BLx7i+keOHPwiF9PyWskdC+y+4TVMjPC1tQopW/Pb6jmgMSAuppJeLgT2Hn+gTnxoLqv94GtNdiOUc4ALarZYx4bCX6g94AU5+L9H8/q6RT20fr9G+RxqSvkQeKgc7Obgf9vSJbWJi2nmfyY8LS0GF4oPAAAAAElFTkSuQmCC"/>
+                            <image id="icons8-tag-64_1_" data-name="icons8-tag-64 (1)" x="26" y="9" width="47" height="47" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAvCAYAAABzJ5OsAAADV0lEQVRogdWay2sTURSHv0ymbSoo9dHnohtBF24FHwV36kbdCb4wPqGu3Oo/0IW40JV92Yct6NaCK7WgVFGEgli0SgVXIgqloG6SNkdue0bHNEnvZGaS5geHaZrM3O/knnPuzZlJiAgFtBmoBxKAo8ekWqPvaN7bALhACqgDGoCfwEfgU6GLRyU370IG4DhwDNimDtTpMeVzwn90C/w/CywAt4E7sdGbb16tXUSeSvTqFZGkb5zIzPujQUSexQDuaUxE3KjhvXg+ARyIMTzPAKMFwjSUDPxG4GiM4J5OASOaQ5HBm6rRHNUF19BpoE9nO7QcX8WolM4DQ1qVQslRq68gvNG5KHKgWvBoCI2GyQEvbKoBjybxULkz4Krnju0Jizl4OJfl3fwS+ztcDnWGThdTRjPAZSAX5ERX9yJW8JkcpB//5sHbDCTNhAnX96bo6Wosm1x1QRP4IrBke5IX71aZP/E5uwJen1hxOwc3pzNMf7cer5TSug5YT6UHb/XNz8wvgZP4V6UdyObg/Xwk8GgI3bNN4kDwXe3uyiczsjK5GaG5McG+ttAl26+TwKDNDASCP9jpcm1PiqZUAicJLVuT9HQ1sL0pUnijs0D/mlwiclhEvgbZIr75tijjHzIyt7AU40Z0WSOlttNukIT1tLs1uWwVUFrZzJZiMX84J0iprJKKJnEtwKNJPJDPaV78imqLGrPS6sDfeDXwM8CPGoBHV+Je74WB/wLcqi5TIF0Cus0M+Ps2A/pGLWgWOOJPgG5dGGpBbcAuP7xZ8K9oWaoF1eWXyJyGzv11Dm+6cbOF6ntW9xbjVYCy1d3lXmiJjlRS9xbrTY9EpN7f7itmjoj0rSP4JyKyJb9XWcpMOR1cB+DPtRm8qtFqMwOjVQR/JSJtxbrEtg4MVQF8SkSaS7W4ba3SIWRifPNa/fmgDvRWANzc6GixublQjgPDMYK/EJEO2zsj5ZgT0zrwulByRg3vORDlDBRNzjjgvRDqjwD8vwWoUvCehVmJJ0WkNeiYUcKXG0IvbZIzbnjPgbEA4FO2yVkJePR+q40Dk6UWoGrBo9vpUkk8ISKbwo5T7MGJqGR+Vl4FmrRTYR6oGAZu6N2QUIob3mgHsFN7ouZXv3kaZFXfMbCAPx1ZlDzpy+EyAAAAAElFTkSuQmCC"/>
+                          </svg>
+                           Gratis Ebook 9 Cara Cerdas Menggunakan Domain [ x ]
+                    </div>
+                    <div class="col-md-6 col-12 pt-1">
+                        <div class="float-right">
+                            <a class="text-secondary text-decoration-none ml-2" href="#">
+                                <span class="fa fa-phone mr-1"></span>
+                                0274-5305505
+                            </a>
+                            <a class="text-secondary text-decoration-none  ml-2" href="#">
+                                <span class="oi oi-chat"></span>
+                                Live Chat
+                            </a>
+                            <a class="text-secondary text-decoration-none ml-2" href="#">
+                                <span class="fa fa-circle-user mr-1"></span>
+                                Member Area
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-12 text-center text-md-left ">
+                        <img src="assets/images/logo-niagahoster.jpg" alt="Logo Niagahoster">
+                    </div>
+                    <div class="col-md-8 col-12 pt-1">
+                        <nav class="navbar navbar-expand-lg float-right">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="fa-solid fa-bars"></i>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Hosting</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Domain</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Server</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Website</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Afiliasi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Promo</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Pembayaran</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Review</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Kontak</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary" href="#">Blog</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>          
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container">
+                <div class="row pt-4">
+                    <div class="col-12 col-md-6">
+                        <h1 class="font-roboto-bold">PHP Hosting</b></h1>
+                        <h2 class="font-montserrat text-secondary">
+                            Cepat, handal, penuh dengan <br>
+                            modul PHP yang Anda butuhkan
+                        </h2>
+
+                        <ul class="list-unstyled mt-4 text-secondary">
+                            <li class="h5"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348"></i> Solusi PHP untuk performa query yang lebih cepat. <br></li>
+                            <li class="h5"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348"></i> Konsumsi memory yang lebih rendah. <br></li>
+                            <li class="h5"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348"></i> Support PHP 5.3, PHP 5.4, PHP 5.5, PHP 5.6, PHP 7. <br></li>
+                            <li class="h5"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348"></i> Fitur enkripsi IonCube dan Zend Guard Loaders. <br></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <img src="assets/svg/illustration banner PHP hosting-01.svg"  style="width:90%" class="float-right" alt="Gambar PHp">
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </header>
+        
+        <section>
+            <div class="container pt-5">
+                <div class="row justify-content-center align-items-end">
+                    <div class="col-12 col-md-4 text-center d-flex align-items-end flex-column">
+                        <img class="d-block mx-auto" style="width: 200px" src="assets/images/logo-zendguard.jpg" alt="Logo">
+                        <div class="mt-2 d-block w-100 text-center">PHP Zend Guard Loader</div>
+                    </div>
+                    <div class="col-12 col-md-4 text-center d-flex align-items-end flex-column">
+                        <img class="d-block mx-auto" style="width: 100px" src="assets/images/logo-composer.jpg" alt="Logo">
+                        <div class="mt-2 d-block w-100 text-center">PHP Composer</div>
+                    </div>
+                    <div class="col-12 col-md-4 text-center d-flex align-items-end flex-column">
+                        <img class="d-block mx-auto" style="width: 200px" src="assets/images/logo-ioncube.jpg" alt="Logo">
+                        <div class="mt-2 d-block w-100 text-center">PHP ionCube Loader</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       <section>
+          <div class="container pt-5">
+            <div class="row  pt-3">
+                <div class="col-12 text-center">
+                    <h3 class="font-roboto-bold">Paket Hosting Singapura yang Tepat</h3>
+                    <p class="h5 text-secondary">Diskon 40% + Domain dan SSL Gratis untuk Anda</p>
+                </div>
+            </div>
+            <div class="row pt-5">
+                    {% for i in data.data %}
+                        <div class="col-12 col-md-3 card" style="position: relative;">
+                            <div class="row">
+                                <div class="col-12 text-center p-3"  {{ (i.is_best_saller) ? 'style="background: #008FEE;color:white;"' : '' }}>
+                                    <span class="font-roboto-bold h4">{{ i.title }}</span>
+                                </div>
+                            </div>
+                            {{ (i.is_best_saller) ? '' : '<hr class="m-0">' }}
+                            <div class="row">
+                                <div class="col-12 text-center"  {{ (i.is_best_saller) ? 'style="background: #008FEE;color:white;"' : '' }}>
+                                    <del>Rp. {{ i.price | currency | raw }}</del> <br>
+                                    <p class="m-0" style="vertical-align:middle;">{{ i.discount_price | currency_style | raw }}</p> <br>
+                                </div>
+                            </div>
+                            {{ (i.is_best_saller) ? '' : '<hr class="m-0">' }}
+                            <div class="row">
+                                <div class="col-12 text-center p-2"  {{ (i.is_best_saller) ? 'style="background: #007FDE;color:white;"' : '' }}>
+                                    <b>{{ i.user_count | currency }}</b> Pengguna Terdaftar
+                                </div>
+                            </div>
+                            <hr class="m-0">
+                            <div class="row">
+                                <div class="col-12 p-4 text-center" style="font-size: 90%; line-height: 2;">
+                                    {% for j in i.feature %}
+                                                {% if loop.index == 1 %}
+                                                    <b>{{ j }}</b>
+                                                {% else %}
+                                                    {{ j | feature_format | raw}}
+                                                {% endif %}
+
+                                                <br>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 p-4 text-center" style="font-size: 90%; line-height: 2;">
+                                     {{ i.diskon | button(i.is_best_saller) | raw }}
+                                </div>
+                            </div>
+                            {{ (i.is_best_saller) ? '<img src="assets/images/tag-best-seller.png" alt="Tag Best Saller" style="position: absolute; top:-2px; left:-3px;">' : ''}}
+                        </div>
                     {% endfor %}
-              {% endfor %}
-    </body>
+            </div>
+          </div>
+       </section>
+
+       <section>
+           <div class="container pt-5">
+                <div class="row  pt-5">
+                    <div class="col-12 text-center">
+                        <p class="h2 text-secondary">Powerful dengan Limit PHP yang Lebih Besar</p>
+                    </div>
+                </div>
+                <div class="row  pt-3">
+                    <div class="col-6">
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-1"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348;font-size: 150%"></i></div>
+                                        <div class="col-11 text-center">max execution time 300s</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item" style="background-color: #F7F7F7;">
+                                    <div class="row">
+                                        <div class="col-1"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348;font-size: 150%"></i></div>
+                                        <div class="col-11 text-center">max execution time 300s</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-1"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348;font-size: 150%"></i></div>
+                                        <div class="col-11 text-center">php memory limit 1024 MB</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>                          
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-1"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348;font-size: 150%"></i></div>
+                                        <div class="col-11 text-center">post max size 128 MB</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item" style="background-color: #F7F7F7;">
+                                    <div class="row">
+                                        <div class="col-1"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348;font-size: 150%"></i></div>
+                                        <div class="col-11 text-center">upload max filesize 128 MB</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-1"><i class="fa-solid fa-circle-check mr-2" style="color:#00B348;font-size: 150%"></i></div>
+                                        <div class="col-11 text-center">max input vars 2500</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>                          
+                    </div>
+                </div>
+           </div>
+       </section>
+
+       <div class="row">
+           <div class="col-12 mt-5">
+               <div class="mx-auto" style="width: 130px; height: 5px; background: #F1F1F1;"></div>
+           </div>
+       </div>
+
+       <section>
+        <div class="container">
+             <div class="row  pt-5">
+                 <div class="col-12 text-center">
+                     <p class="h2 text-secondary">Semua Paket Hosting Sudah Termasuk</p>
+                 </div>
+             </div>
+             <div class="row  pt-3">
+                 <div class="col-6">
+                               
+                 </div>
+                 <div class="col-6">
+                             
+                 </div>
+             </div>
+        </div>
+    </section>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -5,9 +5,78 @@
                               "price" : "19900",
                               "discount_price" : "14900",
                               "user_count" : "938",
+                              "is_best_saller" : false,
+                              "diskon" : false,
                               "feature" : [
-                                        "<b>0.5 RESOURCE POWER</b>",                                        
-                                        "<b>500 MB</b> Disk Space"                                        
+                                        "0.5X RESOURCE POWER",                                        
+                                        "500 MB | Disk Space",                                        
+                                        "Unlimited | Bandwidth",                                        
+                                        "Unlimited | Database",                                        
+                                        "1 | Domain",                                        
+                                        "Instant | Backup",                                        
+                                        "Unlimited SSL | Gratis Selamanya"                                      
+                              ]
+                    },
+                    {
+                              "title" : "Pelajar",
+                              "price" : "46900",
+                              "discount_price" : "23540",
+                              "user_count" : "4168",
+                              "is_best_saller" : false,
+                              "diskon" : false,
+                              "feature" : [
+                                        "1X RESOURCE POWER",                                        
+                                        "Unlimited | Disk Space",                                        
+                                        "Unlimited | Bandwidth",                                        
+                                        "Unlimited | POP3 Email",                                        
+                                        "Unlimited | Database",                                        
+                                        "10 | Addon Domains",                                        
+                                        "Instant | Backup",                                        
+                                        "Domain Gratis | Selamanya",                                        
+                                        "Unlimited SSL | Gratis Selamanya"                                      
+                              ]
+                    },
+                    {
+                              "title" : "Personal",
+                              "price" : "58900",
+                              "discount_price" : "38900",
+                              "user_count" : "10017",
+                              "is_best_saller" : true,
+                              "diskon" : false,
+                              "feature" : [
+                                        "2X RESOURCE POWER",                                        
+                                        "Unlimited | Disk Space",                                        
+                                        "Unlimited | Bandwidth",                                        
+                                        "Unlimited | POP3 Email",                                        
+                                        "Unlimited | Database",                                        
+                                        "Unlimited | Addon Domains",                                        
+                                        "Instant | Backup",                                        
+                                        "Domain Gratis | Selamanya",                                        
+                                        "Unlimited SSL | Gratis Selamanya",            
+                                        "Private | Name Server",
+                                        "SpamAssasin | Mail Protection"
+                              ]
+                    },
+                    {
+                              "title" : "Bisnis",
+                              "price" : "109900",
+                              "discount_price" : "65900",
+                              "user_count" : "3.552",
+                              "is_best_saller" : false,
+                              "diskon" : "40%",
+                              "feature" : [
+                                        "3X RESOURCE POWER",                                        
+                                        "Unlimited | Disk Space",                                        
+                                        "Unlimited | Bandwidth",                                        
+                                        "Unlimited | POP3 Email",                                        
+                                        "Unlimited | Database",                                        
+                                        "Unlimited | Addon Domains",                                        
+                                        "Instant | Backup",                                        
+                                        "Domain Gratis | Selamanya",                                        
+                                        "Unlimited SSL | Gratis Selamanya",            
+                                        "Private | Name Server",
+                                        "<star> <star> <star> <star> <star>",
+                                        "SpamAssasin | Mail Protection"
                               ]
                     }
           ]
