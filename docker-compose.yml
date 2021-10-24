@@ -1,0 +1,65 @@
+version: '3.3'
+
+services:
+    frontend:
+        build:
+          context: .
+          dockerfile: Frontend-Dockerfile
+        image: khisby/frontend
+        container_name: frontend
+        volumes:
+            - ./frontend:/var/www/html/
+        ports:
+            - "80:80"
+        networks:
+            - khisoft-network
+
+    web:
+        build:
+          context: .
+          dockerfile: Dockerfile
+        image: khisby/niagahoster
+        container_name: boxbilling
+        # volumes:
+        #     - ./src:/var/www/html/
+        ports:
+            - "8004:80"
+        networks:
+            - khisoft-network
+
+    db:
+        image: mysql:5.7
+        container_name: db
+        ports:
+             - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: mysql
+            MYSQL_DATABASE: boxbilling
+            MYSQL_USER: khisoft
+            MYSQL_PASSWORD: khisoft
+        volumes:
+            - khisoft-mysql:/var/lib/mysql/
+            - ./config/mysql/:/docker-entrypoint-initdb.d
+        networks:
+            - khisoft-network
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        links:
+            - db
+        ports:
+            - 8183:80
+        environment:
+            MYSQL_USERNAME: khisoft
+            MYSQL_ROOT_PASSWORD: khisoft
+            PMA_ARBITRARY: 1
+        networks:
+            - khisoft-network
+
+
+networks:
+    khisoft-network:
+        driver: bridge
+volumes:
+  khisoft-mysql:

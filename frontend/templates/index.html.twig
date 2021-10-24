@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Khisoft Niagahoster</title>
+    </head>
+    <body>
+              {% for i in data.data %}
+                    {{ i.title }}<br>
+                    {% for j in i.feature %}
+                              {{ j  | raw }}
+                              <br>
+                    {% endfor %}
+              {% endfor %}
+    </body>
+</html>
